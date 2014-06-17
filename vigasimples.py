@@ -1,19 +1,21 @@
 import numpy as np
-from matplotlib import pyplot as plt
 
-#input - dados que devem ser inseridos pelo usuario
-bw =0.20
-h  =0.55
-fck=25*10**6
-CA =50
-cobrimento = 0.025
-estribo    = 0.006
-Mk = 214.37*1000#79.62*10**3
-Ey = 210*10**9
-dl = 0.05 #d` no caso da viga cair no dominio 4
+'''Dimensionamento da armadura para viga de secao retangular'''
 
-#Tabela de bitolas comerciais
+'''INPUT'''
+bw =0.2             #Em metros
+h  =0.5             #Em metros
+fck=25*10**6        #Em Pa
+CA =50              #
+cobrimento = 0.025  #Em metros
+estribo    = 0.005  #Em metros
+Mk = 94.9/1.4*1000    #Em Newtons.Metros
+Ey = 210*10**9      #Em Pa - modulo do aco
+d   =0.45 # 0.06 eh uma estimativa media da altura do centro de gravidade das armaduras
+            # Para lajes d = h - cobrimento - 0.005
 
+dl = 0.05           #Em metros - d' no caso da viga cair no dominio 4 
+''' INPUT - End '''
 
 
 #Calculos iniciais - primeiras variaveis a serem calculadas partindo do input
@@ -21,7 +23,6 @@ dl = 0.05 #d` no caso da viga cair no dominio 4
 fyk =CA*10**7
 fyd =fyk/1.15 # 1.15 foi o fator de minoracao para o aco
 fcd =fck/1.4 # 1.4 foi o fator de minoracao para o concreto
-d   =h-0.06 # 0.06 eh uma estimativa media da altura do centro de gravidade das armaduras
 Md  =Mk*1.4
 Ecs = 0.85*5600*((fck*10**(-6))**0.5)*10**6
 eyd = fyd/Ey
