@@ -17,6 +17,7 @@ class Viga():
         STORED:
             h         = altura da viga em metros
             bw        = largura da viga em metros
+            fck       = resistencia caracteristica do concreto
             fyk       = resistencia caracteristica do aco
             fyd       = resistencia de projeto do aco
             fcd       = resitencia de projeto do concreto
@@ -34,6 +35,7 @@ class Viga():
         self.h      = h/100.0
         self.d      = (h-6.0)/100.0
         self.bw     = bw/100.0
+        self.fck    = fck
         self.fyk    = CA*10.0**7
         self.fyd    = self.fyk/1.15
         self.fcd    = fck/1.4*10**6
@@ -186,7 +188,53 @@ class Viga():
         self.Asl    = self.Asl*10**4    #para cm2
         self.dominio= dominio
                 
+    def Estribos(self,Vsk,bitola=5,cobrimento= 2.5,Vsd=False):
+        Vsd  = Vsk * 1.4 * 1000
+        Vrd2 = 0.27*(1-(self.fck/10.0**6)/250.)*self.fck*self.bw*self.d/1.4
         
+        cobrimento = cobrimento/100.
+        
+        
+        print ' -------Conferindo a biela comprimida ----------'
+        print 'Resistencia da biela = ', Vrd2,'N'
+        if Vsd>Vrd2:
+            print 'Cisalhamento maior do que resistencia a compressao da biela. Deve-se alterar a dimensao ou material da viga'
+        else: print 'Vrd2>Vsd - Viga esta ok nesse parametro'
+        print '------------------------------------------------'
+        print 
+        
+        print '''-----------Espacamento dos estribos-------------'''
+        
+        
+        Asw  = 2*(bitola/1000.)**2*np.pi/4.0
+        
+        Vrdmin= 0.137*(self.fck/10.0**6)**(2./3.)*self.bw*self.d*10**6
+        sm = Asw*self.fyk/(0.2*0.3*self.bw*(self.fck/10.0**6)**(2./3.)*10**6) #Espacamento do cisalhamento minimo
+        print 'Vrmin =',round(Vrdmin,2),'N'
+        
+        if Vrdmin>Vsd:
+            print 'Vrmin > Vsd : Usar tudo minimo!(Cheque se passa do permitido)'
+            s = sm
+        else:
+            Vc= 0.6*0.15*(self.fck/(10**6))**(2./3.)*self.bw*self.d*(10**6)
+            Vsw = Vsd - Vc
+            s   = Asw*0.9*self.d*self.fyd/Vsw #Espacamento para Cortante maior que o minimo
+        
+        if Vrd2*0.67>=Vsd: #Espacamento maximo permitido
+            smax = min([0.6*self.d,.30])
+        else:
+            smax = min([0.3*self.d,.20])
+        
+        if s>smax:
+            s=smax
+        self.Comprimento_Estribo=((self.bw-2*cobrimento)*2+self.d*2+0.14)*100
+        
+        
+        
+            
 a = Viga(175+6, 18, 26)
+
+
 a.DimensionarT(10000.0/1.4, 170, 20)
+a.Estribos(122.0)
 
