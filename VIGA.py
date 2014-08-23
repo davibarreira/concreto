@@ -30,7 +30,7 @@ class Viga():
             Obs: Os valores de projeto sao encontrados atraves de fatores de minoracao e majoracao de carga.
                  Nesse programa adotacao os valores prescritos na NBR 6118:2014
                  Para concreto utiliza-se 1.4 e para o aco 1.15
-            
+
         '''
         self.h      = h/100.0
         self.d      = (h-6.0)/100.0
@@ -195,7 +195,7 @@ class Viga():
         cobrimento = cobrimento/100.
         
         
-        print ' -------Conferindo a biela comprimida ----------'
+        print ' --------Conferindo a biela comprimida -----------'
         print 'Resistencia da biela = ', Vrd2,'N'
         if Vsd>Vrd2:
             print 'Cisalhamento maior do que resistencia a compressao da biela. Deve-se alterar a dimensao ou material da viga'
