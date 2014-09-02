@@ -233,8 +233,5 @@ class Viga():
         
             
 a = Viga(175+6, 18, 26)
-
-
 a.DimensionarT(10000.0/1.4, 170, 20)
 a.Estribos(122.0)
-
