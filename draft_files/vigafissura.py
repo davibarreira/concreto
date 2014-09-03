@@ -3,22 +3,29 @@ import numpy as np
 '''Dimensionamento da armadura para viga de secao retangular'''
 
 '''INPUT'''
-bw =0.2             #Em metros
-h  =0.5             #Em metros
-fck=25*10**6        #Em Pa
+bw =25              #Em cm
+h  =80              #Em cm
+fck=25              #Em MPa
 CA =50              #
-cobrimento = 0.025  #Em metros
-estribo    = 0.005  #Em metros
-Mk = 94.9/1.4*1000    #Em Newtons.Metros
-Ey = 210*10**9      #Em Pa - modulo do aco
-d   =0.45 # 0.06 eh uma estimativa media da altura do centro de gravidade das armaduras
-            # Para lajes d = h - cobrimento - 0.005
+Md = 300            #Em kN.m
+Ey = 210*10**3      #Em MPa
+d   =75.5           #Em cm
 ae  = 8.82
-dl  = 0.05           #Em metros - d' no caso da viga cair no dominio 4
-As  = 15.75
+As  = 15.75         #Em cm2
+bitola  = 20 #mm bitola em analise
+ni      = 2.25 #O que eh isso?
+pcri    =0.032 #pcri = Asi/Acri o que eh isso?
+
+fctm    = 0.3*fck**(2./3.)
 ''' INPUT - End '''
 
-Xln = ae*As/bw*((1+2*bw*d)/(ae*As))**0.5
+Xln = ae*As/bw*(((1+2*bw*d)/(ae*As))**0.5-1)
 I2  = bw*Xln**3/12.0 + (bw*Xln)*(Xln/2.0)**2+ae*As*(d-Xln)
 I2  = bw*Xln**3/3.0 + ae*As*(d-Xln)**2
 
+print Xln
+Fs  = ae*Md*100*(d-Xln)/I2             #Em kN/cm2
+print Fs
+Fs  = 281.9
+wk  = np.array([bitola*Fs*3*Fs/(12.5*ni*Ey*fctm),bitola*Fs*(4./pcri+45)/(12.5*ni*Ey)])
+print wk
