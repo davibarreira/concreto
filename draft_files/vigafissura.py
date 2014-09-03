@@ -20,7 +20,6 @@ fctm    = 0.3*fck**(2./3.)
 ''' INPUT - End '''
 
 Xln = ae*As/bw*(((1+2*bw*d)/(ae*As))**0.5-1)
-I2  = bw*Xln**3/12.0 + (bw*Xln)*(Xln/2.0)**2+ae*As*(d-Xln)
 I2  = bw*Xln**3/3.0 + ae*As*(d-Xln)**2
 
 print Xln
