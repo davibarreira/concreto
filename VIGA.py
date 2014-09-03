@@ -43,7 +43,7 @@ class Viga():
         self.eyd    = self.fyd/Ey
         self.Asmin=0.0015*self.h*self.bw*10**4
         self.Asmax=0.04*self.h*self.bw*10**4
-        
+
     def Dimensionar(self,Mk,Md=False):
         '''
         DIMENSIONAR: Essa funcao faz o dimensionamento da armadura da viga simples.
@@ -228,10 +228,10 @@ class Viga():
         if s>smax:
             s=smax
         self.Comprimento_Estribo=((self.bw-2*cobrimento)*2+self.d*2+0.14)*100
-        
-        
-        
-            
+
+
+
+
 a = Viga(175+6, 18, 26)
 a.DimensionarT(10000.0/1.4, 170, 20)
 a.Estribos(122.0)
