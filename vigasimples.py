@@ -11,7 +11,7 @@ cobrimento = 0.025  #Em metros
 estribo    = 0.005  #Em metros
 Mk = 94.9/1.4*1000    #Em Newtons.Metros
 Ey = 210*10**9      #Em Pa - modulo do aco
-d   =0.45 # 0.06 eh uma estimativa media da altura do centro de gravidade das armaduras
+d   =0.44 # 0.06 eh uma estimativa media da altura do centro de gravidade das armaduras
             # Para lajes d = h - cobrimento - 0.005
 
 dl = 0.05           #Em metros - d' no caso da viga cair no dominio 4 
