@@ -30,7 +30,7 @@ class Viga():
             Obs: Os valores de projeto sao encontrados atraves de fatores de minoracao e majoracao de carga.
                  Nesse programa adotacao os valores prescritos na NBR 6118:2014
                  Para concreto utiliza-se 1.4 e para o aco 1.15
-            
+
         '''
         self.h      = h/100.0
         self.d      = (h-6.0)/100.0
@@ -43,7 +43,7 @@ class Viga():
         self.eyd    = self.fyd/Ey
         self.Asmin=0.0015*self.h*self.bw*10**4
         self.Asmax=0.04*self.h*self.bw*10**4
-        
+
     def Dimensionar(self,Mk,Md=False):
         '''
         DIMENSIONAR: Essa funcao faz o dimensionamento da armadura da viga simples.
@@ -195,7 +195,7 @@ class Viga():
         cobrimento = cobrimento/100.
         
         
-        print ' -------Conferindo a biela comprimida ----------'
+        print ' --------Conferindo a biela comprimida -----------'
         print 'Resistencia da biela = ', Vrd2,'N'
         if Vsd>Vrd2:
             print 'Cisalhamento maior do que resistencia a compressao da biela. Deve-se alterar a dimensao ou material da viga'
@@ -228,13 +228,10 @@ class Viga():
         if s>smax:
             s=smax
         self.Comprimento_Estribo=((self.bw-2*cobrimento)*2+self.d*2+0.14)*100
-        
-        
-        
-            
+
+
+
+
 a = Viga(175+6, 18, 26)
-
-
 a.DimensionarT(10000.0/1.4, 170, 20)
 a.Estribos(122.0)
-
