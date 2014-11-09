@@ -237,4 +237,4 @@ a = Viga(h=22.9, bw=100., fck=25.)
 a.Dimensionar(Mk=14.6)
 print a.As
 print a.dominio
-a.Estribos(122.0)
+#a.Estribos(122.0)
