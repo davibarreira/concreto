@@ -16,17 +16,17 @@ import numpy as np
     
     '''
 
-Nk  = 370.*11        #kN
+Nk  = 350./1.4        #kN
 Nd  = 1.4*Nk         
 fck = 20.            #Mpa
 fcd = fck*1000./1.4
 
 CA  = 50.
 fyd =CA*10**7/1.15
-bw  = 30.           #cm
-h   = 110.          #cm
-l   = 4.2           #comprimento o pilar (m)
-coefapoio = 0.7    #coeficiente para comprimento equivalente. 0.5 para biengastado, 0.7 para engaste apoio, 1.0 para biapoiada, 2.0 para balanco
+bw  = 14.           #cm
+h   = 30.          #cm
+l   = 3.2/2.0           #comprimento o pilar (m)
+coefapoio = 2.    #coeficiente para comprimento equivalente. 0.5 para biengastado, 0.7 para engaste apoio, 1.0 para biapoiada, 2.0 para balanco
 le  = coefapoio*l
 Ac  = bw*h/(10**4)
 
@@ -60,7 +60,7 @@ elif esb1x >= 90. : ebs1x=90.
 if esbx>esb1x and esbx<=90:
     print 'Pilar medianamente esbelto'
     vx = Nd/(Ac*fcd)
-    e2x = np.min([(le**2)/10.*0.005/(bw(vx+0.5)),(le**2)/10.*0.005/bw])
+    e2x = np.min([(le**2)/10.*0.005/(bw*(vx+0.5)),(le**2)/10.*0.005/bw])
     
 elif esbx<esb1x:
     print 'Pilar curto. Nao tem excentricidade de segunda ordem local'
@@ -97,3 +97,5 @@ ux = Nd*ex/(Ac*bw*fcd)
 Asmin = np.max([0.15*Nd/fyd,0.004*Ac])
 
 print vx
+print e2x
+print ux
