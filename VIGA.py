@@ -2,7 +2,7 @@ import numpy as np
 
 
 class Viga():
-    def __init__(self,h,bw,fck=25,CA=50,d=False,Ey = 210*10**9):
+    def __init__(self,h,bw,fck=25,CA=50,d=False,Ey = 210*10**9,coe=2.5):
         '''
         VIGA: Propriedades
         ==================
@@ -13,6 +13,7 @@ class Viga():
             fck       = resistencia caracteristica do concreto (MPa)
             CA        = resistencia do aco (10MPa)
             Ey        = modulo de elasticidade do aco
+            coe       = cobrimento mais estribo, para calcular o 'd' valor em centimetros
             
         STORED:
             h         = altura da viga em metros
@@ -33,7 +34,7 @@ class Viga():
 
         '''
         self.h      = h/100.0
-        self.d      = (h-6.0)/100.0
+        self.d      = (h-coe)/100.0
         self.bw     = bw/100.0
         self.fck    = fck
         self.fyk    = CA*10.0**7
@@ -99,7 +100,7 @@ class Viga():
             
         self.As     = self.As*10**4
         self.Asl    = self.Asl*10**4
-    
+        self.dominio= dominio
     def DimensionarT(self,Mk,bf,hf,Md=False):
         
         '''
@@ -232,6 +233,8 @@ class Viga():
 
 
 
-a = Viga(175+6, 18, 26)
-a.DimensionarT(10000.0/1.4, 170, 20)
+a = Viga(h=22.9, bw=100., fck=25.)
+a.Dimensionar(Mk=14.6)
+print a.As
+print a.dominio
 a.Estribos(122.0)

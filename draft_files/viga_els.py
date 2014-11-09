@@ -15,10 +15,7 @@ Ey = 210*10**3      #Em MPa
 d   =75.5           #Em cm
 ae  = 8.82
 As  = 15.75         #Em cm2
-bitola  = 20 #mm bitola em analise
-ni      = 2.25 #O que eh isso?
-pcri    =0.032 #pcri = Asi/Acri o que eh isso?
-alpha   = 5./48.#Valor tabelado dependendo do tipo de apoio da viga
+alpha   = 5./48.    #Valor tabelado dependendo do tipo de apoio da viga
 
 l       =8.0    #Em m, comprimento da viga
 
@@ -35,6 +32,6 @@ I2  = (bw*Xln**3/3.0 + ae*As*(d-Xln)**2)/10**8
 Mr  = 1.5*fctm*(bw/100.0)*(((h/100.0)**3)/12.0)/((h/100.)*0.5)*1000  #em kN.m - Momento Resistido pelo concreto tracionado
 
 EIeq = Ecs*((Mr/Ms)**3*Ic + (1-(Mr/Ms)**3)*I2)*10**3 #Em kN.m2
-
+print EIeq
 fi  = alpha*Ms*l**2/EIeq*100    #Em cm - Flecha imediata
 print fi
