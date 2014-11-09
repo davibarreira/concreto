@@ -16,24 +16,24 @@ import numpy as np
     
     '''
 
-Nk  = 350./1.4        #kN
+Nk  = 1072        #kN
 Nd  = 1.4*Nk         
 fck = 20.            #Mpa
 fcd = fck*1000./1.4
 
 CA  = 50.
 fyd =CA*10**7/1.15
-bw  = 14.           #cm
-h   = 30.          #cm
-l   = 3.2/2.0           #comprimento o pilar (m)
-coefapoio = 2.    #coeficiente para comprimento equivalente. 0.5 para biengastado, 0.7 para engaste apoio, 1.0 para biapoiada, 2.0 para balanco
+bw  = 25.           #cm
+h   = 70.          #cm
+l   = 4.70           #comprimento o pilar (m)
+coefapoio = 1.    #coeficiente para comprimento equivalente. 0.5 para biengastado, 0.7 para engaste apoio, 1.0 para biapoiada, 2.0 para balanco
 le  = coefapoio*l
 Ac  = bw*h/(10**4)
 
-Mdx = 0
+Mdx = 15.3
 Mdy = 0 
-Max = 0
-Mbx = 0
+Max = 15.3          #maior momento absoluto
+Mbx = -15.3         #momento no outro extremo
 May = 0
 Mby = 0
 
@@ -51,7 +51,7 @@ h  = h/100.     #m
 #Esbeltez
 esbx = 3.46*le/bw
 if Max ==0: ab = 1.0
-else: ab = 0.6 + 0.4*Mbx/Max
+else: ab = np.max([0.6 + 0.4*Mbx/Max,0.4])
 
 esb1x=(25.+12.5*e1x/bw)/ab
 if   esb1x <= 35. : esb1x=35.
@@ -77,17 +77,17 @@ elif theta >thetamax: theta=thetamax
 
 ea_ex = theta*l
 ea_cx  = theta*l/2.
-e1min = 0.015 + 0.03*bw
+e1minx = 0.015 + 0.03*bw
 
 if np.abs(coefapoio-2.0)<0.0001:
     ex = np.max([ea_ex+e1x+e2x,
                  ea_cx+e2x/2.0,
-                 e1min+e2x])
+                 e1minx+e2x])
 
 else :
     ex = np.max([ea_ex+e1x,
                  ea_cx+e2x,
-                 e1min+e2x])
+                 e1minx+e2x])
 
 Mxd = Nd*ex
 
@@ -96,6 +96,15 @@ ux = Nd*ex/(Ac*bw*fcd)
 
 Asmin = np.max([0.15*Nd/fyd,0.004*Ac])
 
-print vx
-print e2x
-print ux
+
+print '----------',u"\u03BBx",'=',esbx
+print '----------',u"\u03BB1",'=',esb1x
+
+print '---------- e2x = ',e2x
+print '---------- e1x =' ,e1x
+print '---------- e1minx = ' ,e1minx
+print '---------- ex = ',ex
+print '---------- vx = ',vx
+print '---------- ux = ',ux
+print '---------- Nd = ',Nd
+print '---------- Mxd = ',Mxd
