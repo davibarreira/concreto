@@ -181,7 +181,7 @@ class Viga():
                 if esl<self.eyd: fsl = self.Ey*esl/1.15
                 else: fsl = self.fyd
                 self.Asl = M2/((self.d-dl)*fsl)
-                self.As  = Asl + As34
+                self.As  = self.Asl + As34
                 
             else:
                 self.As = self.Md/(self.fyd*(self.d-0.4*x))
@@ -237,4 +237,3 @@ a = Viga(h=22.9, bw=100., fck=25.)
 a.Dimensionar(Mk=14.6)
 print a.As
 print a.dominio
-#a.Estribos(122.0)
