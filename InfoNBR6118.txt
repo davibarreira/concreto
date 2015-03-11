@@ -1,0 +1,6 @@
+Armadura de Pele:
+    A mínima armadura lateral deve ser 0,10 % A c,alma em cada face da alma da viga e composta por barras de alta
+    aderência (η 1 ≥ 2,25) com espaçamento não maior que 20 cm, respeitado o disposto em 17.3.3.2.
+    Em vigas com altura igual ou inferior a 60 cm, pode ser dispensada a utilização da armadura de pele.
+    A armadura de pele calculada de acordo com 17.3.5.2.3 deve ser disposta de modo que o afastamento entre as
+    barras não ultrapasse d/3 e 20 cm.
