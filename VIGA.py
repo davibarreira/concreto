@@ -233,7 +233,7 @@ class Viga():
 
 
 
-a = Viga(h=22.9, bw=100., fck=25.)
-a.Dimensionar(Mk=14.6)
+a = Viga(h=175.0+2.5, bw=18., fck=26.)
+a.DimensionarT(Mk=10000.0/1.4,bf = 170.0,hf=20.0)
 print a.As
 print a.dominio
